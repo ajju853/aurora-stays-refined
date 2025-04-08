@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Mountain, Palmtree, Building, Waves, Tent, Castle, Snowflake, Coffee } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export type Category = {
   id: string;
@@ -72,40 +73,49 @@ export function CategoryFilter({ onCategoryChange }: CategoryFilterProps) {
 
   return (
     <div className="relative">
-      <div 
+      <motion.div 
         className="flex items-center space-x-1 overflow-x-auto hide-scrollbar py-4"
         ref={scrollRef}
         onScroll={checkScroll}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
       >
         <div className="flex-shrink-0 w-4"></div>
-        {categories.map((category) => {
+        {categories.map((category, index) => {
           const Icon = category.icon;
           return (
-            <Button
+            <motion.div
               key={category.id}
-              variant={activeCategory === category.id ? "default" : "ghost"}
-              className={cn(
-                "rounded-full px-4 py-6 flex-shrink-0 transition-all",
-                activeCategory === category.id 
-                  ? "bg-foreground text-background" 
-                  : "hover:bg-secondary"
-              )}
-              onClick={() => handleCategoryClick(category.id)}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
             >
-              <Icon className="mr-2 h-4 w-4" />
-              {category.name}
-            </Button>
+              <Button
+                variant={activeCategory === category.id ? "default" : "ghost"}
+                className={cn(
+                  "rounded-full px-4 py-6 flex-shrink-0 transition-all",
+                  activeCategory === category.id 
+                    ? "bg-foreground text-background" 
+                    : "hover:bg-secondary"
+                )}
+                onClick={() => handleCategoryClick(category.id)}
+              >
+                <Icon className="mr-2 h-4 w-4" />
+                {category.name}
+              </Button>
+            </motion.div>
           );
         })}
         <div className="flex-shrink-0 w-4"></div>
-      </div>
+      </motion.div>
 
       {canScrollLeft && (
         <div className="absolute left-0 top-1/2 transform -translate-y-1/2">
           <Button
             variant="secondary"
             size="icon"
-            className="rounded-full shadow-md"
+            className="rounded-full shadow-md bg-background/80 backdrop-blur-sm hover:bg-background"
             onClick={() => scroll('left')}
           >
             <ChevronLeft className="h-4 w-4" />
@@ -118,7 +128,7 @@ export function CategoryFilter({ onCategoryChange }: CategoryFilterProps) {
           <Button
             variant="secondary"
             size="icon"
-            className="rounded-full shadow-md"
+            className="rounded-full shadow-md bg-background/80 backdrop-blur-sm hover:bg-background"
             onClick={() => scroll('right')}
           >
             <ChevronRight className="h-4 w-4" />

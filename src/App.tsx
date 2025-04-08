@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ListingDetail from "./pages/ListingDetail";
+import Experiences from "./pages/Experiences";
 import { ThemeProvider } from "next-themes";
 
 // Create the query client outside the component
@@ -20,6 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/listing/:id" element={<ListingDetail />} />
+          <Route path="/experiences" element={<Experiences />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
