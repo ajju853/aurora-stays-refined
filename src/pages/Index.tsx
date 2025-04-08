@@ -9,7 +9,8 @@ import { Footer } from "@/components/Footer";
 import { MobileNav } from "@/components/MobileNav";
 import { Button } from "@/components/ui/button";
 import { listings, getMapPins } from "@/data/mockListings";
-import { MapPin, Globe, Sparkles } from "lucide-react";
+import { MapPin, Globe, Sparkles, Diamond, Award } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Index = () => {
   const [showMap, setShowMap] = useState(false);
@@ -40,6 +41,11 @@ const Index = () => {
       });
     }
   }, []);
+
+  // Separate premium listings for special showcase
+  const premiumListings = listings.filter(listing => listing.isPremium);
+  const featuredListings = listings.filter(listing => listing.isFeatured);
+  const regularListings = listings.filter(listing => !listing.isPremium && !listing.isFeatured);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -78,7 +84,12 @@ const Index = () => {
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto flex flex-col h-full justify-center items-center px-4">
-          <div className="animate-fade-in">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
+          >
             <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6 text-center">
               Discover extraordinary stays
             </h1>
@@ -88,23 +99,102 @@ const Index = () => {
                 Unique destinations and experiences worldwide
               </p>
             </div>
-          </div>
+          </motion.div>
           
-          <div className="w-full max-w-4xl animate-scale-in">
+          <motion.div 
+            className="w-full max-w-4xl"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
             <SearchBar className="w-full glass" />
-          </div>
+          </motion.div>
           
-          <div className="absolute bottom-10 left-0 right-0 flex justify-center">
+          <motion.div 
+            className="absolute bottom-10 left-0 right-0 flex justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+          >
             <div className="animate-bounce">
               <div className="w-8 h-12 rounded-full border-2 border-white/50 flex justify-center items-start p-1">
                 <div className="w-1 h-3 bg-white/50 rounded-full animate-pulse"></div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
       
       <div className="max-w-7xl mx-auto w-full px-4 py-8 md:py-16">
+        {/* Premium Collection */}
+        {premiumListings.length > 0 && (
+          <div className="mb-16">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-3xl font-display font-semibold flex items-center gap-2">
+                <Diamond className="h-6 w-6 text-amber-500" />
+                Premium Collection
+              </h2>
+              <Button variant="ghost" className="flex items-center gap-2 rounded-full">
+                <Sparkles className="h-4 w-4 text-amber-500" />
+                View All Premium
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {premiumListings.slice(0, 3).map((listing, index) => (
+                <ListingCard
+                  key={listing.id}
+                  id={listing.id}
+                  title={listing.title}
+                  location={listing.location}
+                  images={listing.images}
+                  price={listing.price}
+                  rating={listing.rating}
+                  tags={listing.tags}
+                  index={index}
+                  isPremium={true}
+                  className={focusedListing === listing.id ? "ring-2 ring-amber-500 ring-offset-2" : ""}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Featured Properties */}
+        {featuredListings.length > 0 && (
+          <div className="mb-16">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-3xl font-display font-semibold flex items-center gap-2">
+                <Award className="h-6 w-6 text-primary" />
+                Featured Properties
+              </h2>
+              <Button variant="ghost" className="flex items-center gap-2 rounded-full">
+                <Sparkles className="h-4 w-4 text-primary" />
+                View All Featured
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {featuredListings.slice(0, 3).map((listing, index) => (
+                <ListingCard
+                  key={listing.id}
+                  id={listing.id}
+                  title={listing.title}
+                  location={listing.location}
+                  images={listing.images}
+                  price={listing.price}
+                  rating={listing.rating}
+                  tags={listing.tags}
+                  index={index}
+                  isFeatured={true}
+                  className={focusedListing === listing.id ? "ring-2 ring-primary ring-offset-2" : ""}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Main Explore Section */}
         <div className="mb-12">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-3xl font-display font-semibold">Explore top destinations</h2>
@@ -121,7 +211,7 @@ const Index = () => {
             showMap ? "w-1/2 pr-4" : "w-full"
           }`}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {listings.map((listing, index) => (
+              {regularListings.map((listing, index) => (
                 <ListingCard
                   key={listing.id}
                   id={listing.id}
@@ -132,6 +222,7 @@ const Index = () => {
                   rating={listing.rating}
                   tags={listing.tags}
                   index={index}
+                  isRareFind={listing.isRareFind}
                   className={focusedListing === listing.id ? "ring-2 ring-primary ring-offset-2" : ""}
                 />
               ))}
