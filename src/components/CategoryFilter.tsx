@@ -4,13 +4,13 @@ import { ChevronLeft, ChevronRight, Mountain, Palmtree, Building, Waves, Tent, C
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type Category = {
+export type Category = {
   id: string;
   name: string;
   icon: React.ElementType;
 };
 
-const categories: Category[] = [
+export const categories: Category[] = [
   { id: "views", name: "Amazing views", icon: Mountain },
   { id: "beach", name: "Beachfront", icon: Waves },
   { id: "modern", name: "Modern", icon: Building },
@@ -21,7 +21,11 @@ const categories: Category[] = [
   { id: "cafe", name: "Cafes", icon: Coffee },
 ];
 
-export function CategoryFilter() {
+type CategoryFilterProps = {
+  onCategoryChange?: (category: string | null) => void;
+};
+
+export function CategoryFilter({ onCategoryChange }: CategoryFilterProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -57,6 +61,15 @@ export function CategoryFilter() {
     setTimeout(checkScroll, 300); // Check after animation
   };
 
+  const handleCategoryClick = (categoryId: string) => {
+    const newCategory = activeCategory === categoryId ? null : categoryId;
+    setActiveCategory(newCategory);
+    
+    if (onCategoryChange) {
+      onCategoryChange(newCategory);
+    }
+  };
+
   return (
     <div className="relative">
       <div 
@@ -77,7 +90,7 @@ export function CategoryFilter() {
                   ? "bg-foreground text-background" 
                   : "hover:bg-secondary"
               )}
-              onClick={() => setActiveCategory(activeCategory === category.id ? null : category.id)}
+              onClick={() => handleCategoryClick(category.id)}
             >
               <Icon className="mr-2 h-4 w-4" />
               {category.name}

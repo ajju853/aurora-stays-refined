@@ -8,7 +8,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { MobileNav } from "@/components/MobileNav";
 import { Button } from "@/components/ui/button";
-import { listings, getMapPins } from "@/data/mockListings";
+import { listings, getMapPins, getListingsByCategory } from "@/data/mockListings";
 import { MapPin, Globe, Sparkles, Diamond, Award } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -16,8 +16,16 @@ const Index = () => {
   const [showMap, setShowMap] = useState(false);
   const [focusedListing, setFocusedListing] = useState<string | null>(null);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [filteredListings, setFilteredListings] = useState(listings);
+  
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  
+  // Apply category filtering
+  useEffect(() => {
+    setFilteredListings(getListingsByCategory(activeCategory));
+  }, [activeCategory]);
   
   // Parallax effect for hero section
   useEffect(() => {
@@ -42,10 +50,10 @@ const Index = () => {
     }
   }, []);
 
-  // Separate premium listings for special showcase
-  const premiumListings = listings.filter(listing => listing.isPremium);
-  const featuredListings = listings.filter(listing => listing.isFeatured);
-  const regularListings = listings.filter(listing => !listing.isPremium && !listing.isFeatured);
+  // Separate premium and featured listings for special showcase
+  const premiumListings = filteredListings.filter(listing => listing.isPremium);
+  const featuredListings = filteredListings.filter(listing => listing.isFeatured && !listing.isPremium);
+  const regularListings = filteredListings.filter(listing => !listing.isPremium && !listing.isFeatured);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -126,6 +134,18 @@ const Index = () => {
       </section>
       
       <div className="max-w-7xl mx-auto w-full px-4 py-8 md:py-16">
+        {/* Category Filtering */}
+        <div className="mb-12">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-3xl font-display font-semibold">Explore top destinations</h2>
+            <Button variant="ghost" className="flex items-center gap-2 rounded-full">
+              <Sparkles className="h-4 w-4 text-primary" />
+              Inspire Me
+            </Button>
+          </div>
+          <CategoryFilter onCategoryChange={setActiveCategory} />
+        </div>
+      
         {/* Premium Collection */}
         {premiumListings.length > 0 && (
           <div className="mb-16">
@@ -195,17 +215,6 @@ const Index = () => {
         )}
         
         {/* Main Explore Section */}
-        <div className="mb-12">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-3xl font-display font-semibold">Explore top destinations</h2>
-            <Button variant="ghost" className="flex items-center gap-2 rounded-full">
-              <Sparkles className="h-4 w-4 text-primary" />
-              Inspire Me
-            </Button>
-          </div>
-          <CategoryFilter />
-        </div>
-        
         <div className="flex mt-4 mb-8">
           <div className={`transition-all duration-500 ${
             showMap ? "w-1/2 pr-4" : "w-full"

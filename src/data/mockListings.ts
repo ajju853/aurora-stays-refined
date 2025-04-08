@@ -14,6 +14,7 @@ export const listings = [
     rating: 4.97,
     description: "Experience tranquility in this stunning beachfront villa with panoramic ocean views. The property features an infinity pool that seemingly merges with the horizon, creating a breathtaking visual spectacle. Inside, find four spacious bedrooms, a fully-equipped modern kitchen, and a luxurious living area with floor-to-ceiling windows showcasing the spectacular surroundings.",
     tags: ["Beachfront", "Pool", "Luxury", "Ocean view"],
+    categories: ["beach", "views", "tropical"],
     features: ["4 bedrooms", "5 bathrooms", "Infinity pool", "Private beach access", "Full kitchen", "Air conditioning", "Wifi", "Daily housekeeping"],
     host: {
       name: "Alexandra",
@@ -42,6 +43,7 @@ export const listings = [
     rating: 4.89,
     description: "Escape to this architecturally stunning mountain retreat with floor-to-ceiling windows showcasing breathtaking mountain views. The property seamlessly blends rustic charm with modern design, featuring exposed wooden beams and contemporary furnishings. Relax in the outdoor hot tub under the stars after a day of hiking or skiing in the nearby mountains.",
     tags: ["Mountain view", "Hot tub", "Fireplace", "Modern"],
+    categories: ["views", "skiing", "modern"],
     features: ["3 bedrooms", "2 bathrooms", "Hot tub", "Fireplace", "Full kitchen", "Wifi", "Washer/dryer", "Deck"],
     host: {
       name: "Michael",
@@ -68,6 +70,7 @@ export const listings = [
     rating: 4.95,
     description: "Experience Tokyo from this ultra-modern penthouse featuring minimalist design and breathtaking views of the city skyline. The open-concept living space is adorned with sleek contemporary furniture and smart home technology. Floor-to-ceiling windows in every room showcase the mesmerizing cityscape, while the rooftop terrace offers an exceptional space for entertaining or relaxation.",
     tags: ["City view", "Penthouse", "Minimalist", "Luxury"],
+    categories: ["views", "modern"],
     features: ["2 bedrooms", "2.5 bathrooms", "Smart home", "Rooftop terrace", "Concierge service", "Gym access", "High-speed wifi", "Home theater"],
     host: {
       name: "Yuki",
@@ -95,6 +98,7 @@ export const listings = [
     rating: 4.88,
     description: "Immerse yourself in Barcelona's vibrant artistic atmosphere in this tastefully renovated historical loft. Original architectural features like exposed brick walls and wooden beams are complemented by contemporary art pieces and stylish furnishings. Located in the heart of the artistic district, you'll be steps away from galleries, cafes, and the city's most famous landmarks.",
     tags: ["Historic", "Artistic", "Central", "Stylish"],
+    categories: ["modern", "cafe"],
     features: ["1 bedroom", "1 bathroom", "Original architecture", "Art collection", "Fast wifi", "Fully equipped kitchen", "Air conditioning", "Walking distance to attractions"],
     host: {
       name: "Carlos",
@@ -121,6 +125,7 @@ export const listings = [
     rating: 4.92,
     description: "Experience the magic of living among the treetops in this eco-friendly treehouse retreat. Surrounded by lush rainforest, the property offers a unique blend of adventure and tranquility. The open-air design allows you to fully immerse in nature while enjoying modern comforts. Fall asleep to the sounds of the forest and wake up to spectacular sunrise views and visiting wildlife.",
     tags: ["Treehouse", "Eco-friendly", "Nature", "Unique"],
+    categories: ["views", "tropical", "camping"],
     features: ["1 bedroom", "1 bathroom", "Outdoor shower", "Private deck", "Sustainable design", "Solar power", "Rainforest views", "Wildlife spotting"],
     host: {
       name: "Elena",
@@ -148,6 +153,7 @@ export const listings = [
     rating: 4.96,
     description: "Discover tranquility in this exquisite desert oasis featuring traditional Moroccan architecture with a contemporary twist. The courtyard centers around a stunning private pool surrounded by lush palm gardens. Inside, handcrafted furnishings, intricate tile work, and luxurious textiles create an authentic and elegant atmosphere. Enjoy spectacular sunset views over the desert landscape from the rooftop terrace.",
     tags: ["Desert view", "Pool", "Moroccan style", "Garden"],
+    categories: ["views", "modern"],
     features: ["3 bedrooms", "3 bathrooms", "Private pool", "Courtyard garden", "Rooftop terrace", "Air conditioning", "Traditional hammam", "Daily breakfast"],
     host: {
       name: "Yasmine",
@@ -174,6 +180,7 @@ export const listings = [
     rating: 5.0,
     description: "Experience unparalleled luxury in this exclusive penthouse overlooking Dubai Marina. This spectacular residence features panoramic views through floor-to-ceiling windows, private elevator access, and direct access to yacht services. The opulent interior showcases Italian marble, designer furnishings, and smart home technology throughout. A private chef and butler service are available upon request.",
     tags: ["Waterfront", "Penthouse", "Ultra Luxury", "Marina View"],
+    categories: ["beach", "modern", "views"],
     features: ["4 bedrooms", "5 bathrooms", "Private elevator", "Yacht access", "Infinity pool", "Smart home", "24/7 concierge", "Private chef available"],
     host: {
       name: "Khalid",
@@ -202,6 +209,7 @@ export const listings = [
     rating: 4.99,
     description: "Escape to this breathtaking overwater villa in the pristine Maldives. This exclusive retreat offers direct lagoon access from your private deck with stunning sunset views. The villa features a glass floor section for observing marine life, a private infinity pool that blends seamlessly with the ocean horizon, and personalized butler service. Indulge in the ultimate tropical paradise experience.",
     tags: ["Overwater", "Private Beach", "Ultra Luxury", "Island"],
+    categories: ["beach", "tropical", "views"],
     features: ["1 master suite", "Indoor/outdoor bathroom", "Private infinity pool", "Direct ocean access", "Butler service", "Water sports equipment", "Sunset views", "Gourmet dining"],
     host: {
       name: "Ibrahim",
@@ -229,6 +237,7 @@ export const listings = [
     rating: 4.95,
     description: "Step back in time at this magnificently restored 16th-century castle nestled among the rolling hills of Tuscany. This exclusive property sits on a private estate with its own vineyard and olive groves. Featuring original frescoes, elegant antique furnishings, and modern amenities discreetly integrated into the historic setting. Enjoy wine tastings from your private cellar, cooking classes with local chefs, and panoramic countryside views.",
     tags: ["Historic", "Vineyard", "Castle", "Countryside"],
+    categories: ["castles", "views"],
     features: ["8 bedrooms", "7 bathrooms", "Private vineyard", "Wine cellar", "Swimming pool", "Tennis court", "Chef's kitchen", "Olive grove"],
     host: {
       name: "Francesca",
@@ -256,6 +265,7 @@ export const listings = [
     rating: 4.97,
     description: "Experience the ultimate mountain luxury in this stunning contemporary chalet nestled in the Swiss Alps. This architectural masterpiece features walls of glass showcasing panoramic mountain views, a private indoor swimming pool, and a wellness area complete with sauna and steam room. The chalet includes ski-in/ski-out access, heated boot room, and a cozy home cinema for après-ski relaxation.",
     tags: ["Mountain View", "Ski-in/Ski-out", "Indoor Pool", "Luxury"],
+    categories: ["views", "skiing", "modern"],
     features: ["5 bedrooms", "6 bathrooms", "Indoor pool", "Wellness spa", "Home cinema", "Wine cellar", "Heated terraces", "Ski room"],
     host: {
       name: "Thomas",
@@ -283,6 +293,7 @@ export const listings = [
     rating: 4.98,
     description: "Indulge in this award-winning architectural masterpiece situated on a private beach in Phuket. This ultra-modern estate features clean lines, minimalist design, and seamless indoor-outdoor living spaces. The infinity pool appears to flow directly into the Andaman Sea, creating a mesmerizing visual effect. Enjoy the services of a private chef, daily housekeeping, and dedicated concierge throughout your stay.",
     tags: ["Beachfront", "Modern Design", "Private Chef", "Infinity Pool"],
+    categories: ["beach", "modern", "tropical"],
     features: ["6 bedrooms", "7 bathrooms", "Infinity pool", "Private beach", "Cinema room", "Fitness center", "Private chef", "Concierge service"],
     host: {
       name: "Siri",
@@ -311,6 +322,7 @@ export const listings = [
     rating: 4.92,
     description: "Experience the height of urban sophistication in this elegant penthouse loft in the heart of Manhattan. Floor-to-ceiling windows showcase breathtaking views of the iconic New York skyline. This expertly designed space features soaring ceilings, high-end finishes, and a gourmet kitchen. Located just steps from fine dining, world-class shopping, and cultural attractions, this is the perfect luxury base for exploring the city.",
     tags: ["City View", "Penthouse", "Design", "Central"],
+    categories: ["modern", "cafe", "views"],
     features: ["2 bedrooms", "2.5 bathrooms", "Gourmet kitchen", "Home office", "Doorman building", "Fitness center", "Rooftop access", "Smart home system"],
     host: {
       name: "Sophia",
@@ -325,6 +337,228 @@ export const listings = [
     },
     isPremium: true
   },
+  {
+    id: "13",
+    title: "Charming Mountain Cabin with Panoramic Views",
+    location: "Banff National Park, Canada",
+    images: [
+      "https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1920&auto=format"
+    ],
+    price: 320,
+    rating: 4.96,
+    description: "Nestled in the heart of the Canadian Rockies, this charming cabin offers breathtaking panoramic views of snow-capped mountains and pristine wilderness. The floor-to-ceiling windows frame the stunning landscape, while the interior combines rustic elements with modern comfort. Enjoy the crackling fireplace after a day of hiking or skiing in the nearby national park.",
+    tags: ["Mountain View", "Rustic", "Nature", "Hiking"],
+    categories: ["views", "skiing", "camping"],
+    features: ["2 bedrooms", "1.5 bathrooms", "Wood-burning fireplace", "Full kitchen", "Private deck", "BBQ grill", "Hiking trails access", "Wildlife viewing"],
+    host: {
+      name: "Robert",
+      image: "https://i.pravatar.cc/150?img=30",
+      isSuperHost: true,
+      joinedDate: "2017"
+    },
+    reviews: 112,
+    location_cords: {
+      lat: 51.1784,
+      lng: -115.5708
+    },
+    isRareFind: true
+  },
+  {
+    id: "14",
+    title: "Cozy Beachside Bungalow with Ocean Views",
+    location: "Tulum, Mexico",
+    images: [
+      "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?q=80&w=1920&auto=format"
+    ],
+    price: 180,
+    rating: 4.89,
+    description: "This cozy beachside bungalow offers the perfect blend of comfort and tropical paradise. Fall asleep to the sound of waves and wake up to stunning sunrise views over the Caribbean. The bungalow features a private deck with direct beach access, hammocks for afternoon relaxation, and simple yet elegant decor inspired by local craftsmanship.",
+    tags: ["Beachfront", "Sunrise View", "Tropical", "Private"],
+    categories: ["beach", "tropical"],
+    features: ["1 bedroom", "1 bathroom", "Private deck", "Beach access", "Hammocks", "Outdoor shower", "Breakfast included", "Beach equipment"],
+    host: {
+      name: "Maria",
+      image: "https://i.pravatar.cc/150?img=23",
+      isSuperHost: false,
+      joinedDate: "2020"
+    },
+    reviews: 74,
+    location_cords: {
+      lat: 20.2114,
+      lng: -87.4654
+    }
+  },
+  {
+    id: "15",
+    title: "Artisanal Coffee House & Loft",
+    location: "Portland, Oregon",
+    images: [
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?q=80&w=1920&auto=format"
+    ],
+    price: 165,
+    rating: 4.92,
+    description: "Experience a coffee lover's dream in this stylish loft apartment situated above an artisanal coffee shop. The space features industrial design elements with warm touches, including exposed brick walls, wood beams, and vintage furnishings. Enjoy complimentary specialty coffee during your stay and explore the vibrant neighborhood filled with boutiques, restaurants, and galleries.",
+    tags: ["Coffee Shop", "Industrial", "Stylish", "Central"],
+    categories: ["cafe", "modern"],
+    features: ["1 bedroom", "1 bathroom", "Complimentary coffee", "Espresso machine", "Record player", "Fast wifi", "Workspace", "Bike rental"],
+    host: {
+      name: "Benjamin",
+      image: "https://i.pravatar.cc/150?img=28",
+      isSuperHost: true,
+      joinedDate: "2019"
+    },
+    reviews: 89,
+    location_cords: {
+      lat: 45.5231,
+      lng: -122.6765
+    }
+  },
+  {
+    id: "16",
+    title: "Medieval Castle Suite with Turret Views",
+    location: "Loire Valley, France",
+    images: [
+      "https://images.unsplash.com/photo-1492321936769-b49830bc1d1e?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1587974044605-c5f0fc79e6e9?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1528803273775-5f4f6d429667?q=80&w=1920&auto=format"
+    ],
+    price: 480,
+    rating: 4.94,
+    description: "Step back in time and experience royal living in this authentic medieval castle suite. The elegantly appointed chamber features a four-poster bed, antique furnishings, and stone walls adorned with tapestries. Climb the spiral staircase to your private turret with panoramic views of the Loire Valley vineyards and countryside. Modern amenities are subtly integrated to ensure comfort without compromising historic character.",
+    tags: ["Castle", "Historic", "Vineyard View", "Luxury"],
+    categories: ["castles", "views"],
+    features: ["1 royal suite", "1 marble bathroom", "Private turret", "Stone fireplace", "Vineyard views", "Castle tour included", "Wine tasting", "Gourmet breakfast"],
+    host: {
+      name: "Pierre",
+      image: "https://i.pravatar.cc/150?img=32",
+      isSuperHost: true,
+      joinedDate: "2016"
+    },
+    reviews: 67,
+    location_cords: {
+      lat: 47.2501,
+      lng: 0.6907
+    },
+    isPremium: true,
+    isRareFind: true
+  },
+  {
+    id: "17",
+    title: "Luxury Glamping Tent by Alpine Lake",
+    location: "Lake Tahoe, California",
+    images: [
+      "https://images.unsplash.com/photo-1506929562872-bb421503ef21?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1533873984035-25970ab07461?q=80&w=1920&auto=format"
+    ],
+    price: 220,
+    rating: 4.91,
+    description: "Experience the perfect blend of camping and luxury in this spacious glamping tent set on the shores of a crystal-clear alpine lake. The canvas accommodation features a plush king-sized bed, stylish furnishings, and a wood-burning stove for cozy evenings. Outside, enjoy your private deck with lake views, a fire pit for s'mores under the stars, and access to kayaks and paddleboards.",
+    tags: ["Glamping", "Lakefront", "Adventure", "Nature"],
+    categories: ["camping", "views"],
+    features: ["King bed", "Wood stove", "Private deck", "Outdoor shower", "Fire pit", "Kayak access", "Breakfast basket", "Lanterns"],
+    host: {
+      name: "Ashley",
+      image: "https://i.pravatar.cc/150?img=25",
+      isSuperHost: false,
+      joinedDate: "2021"
+    },
+    reviews: 53,
+    location_cords: {
+      lat: 39.0968,
+      lng: -120.0324
+    }
+  },
+  {
+    id: "18",
+    title: "Alpine Ski Chalet with Private Hot Tub",
+    location: "Chamonix, France",
+    images: [
+      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1514516816566-de580c621376?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1517449905587-f80a7bfb9613?q=80&w=1920&auto=format"
+    ],
+    price: 340,
+    rating: 4.96,
+    description: "This traditional wooden chalet offers the perfect mountain getaway with ski-in/ski-out access to world-class slopes. After a day on the mountain, relax in your private outdoor hot tub with views of Mont Blanc, or cozy up by the stone fireplace with a glass of wine. The chalet combines rustic alpine charm with modern luxuries for the ultimate ski vacation experience.",
+    tags: ["Ski-in/Ski-out", "Hot Tub", "Mountain View", "Fireplace"],
+    categories: ["skiing", "views"],
+    features: ["3 bedrooms", "2 bathrooms", "Private hot tub", "Ski storage", "Stone fireplace", "Mountain views", "Heated floors", "Boot warmers"],
+    host: {
+      name: "Jean-Luc",
+      image: "https://i.pravatar.cc/150?img=27",
+      isSuperHost: true,
+      joinedDate: "2015"
+    },
+    reviews: 126,
+    location_cords: {
+      lat: 45.9237,
+      lng: 6.8694
+    },
+    isFeatured: true
+  },
+  {
+    id: "19",
+    title: "Trendy Café Apartment in Historic Center",
+    location: "Vienna, Austria",
+    images: [
+      "https://images.unsplash.com/photo-1445116572660-236099ec97a0?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1517231925375-bf2cb42917a5?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1511081692775-eeef5e64b6a1?q=80&w=1920&auto=format"
+    ],
+    price: 195,
+    rating: 4.88,
+    description: "Experience the famous café culture of Vienna in this stylish apartment located above a historic coffeehouse. The thoughtfully designed space features high ceilings, large windows, and elegant furnishings inspired by Vienna's artistic heritage. Enjoy complimentary pastries and coffee from the café downstairs, and explore the city's musical and cultural attractions just steps from your door.",
+    tags: ["Café", "Historic", "Cultural", "Central"],
+    categories: ["cafe", "modern"],
+    features: ["1 bedroom", "1 bathroom", "Café access", "Grand piano", "Music library", "Writing desk", "Coffee machine", "Art books"],
+    host: {
+      name: "Gustav",
+      image: "https://i.pravatar.cc/150?img=31",
+      isSuperHost: false,
+      joinedDate: "2019"
+    },
+    reviews: 71,
+    location_cords: {
+      lat: 48.2082,
+      lng: 16.3738
+    }
+  },
+  {
+    id: "20",
+    title: "Gothic Castle Tower with Fairytale Views",
+    location: "Edinburgh, Scotland",
+    images: [
+      "https://images.unsplash.com/photo-1587974044605-c5f0fc79e6e9?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1546468872-18557a21e14a?q=80&w=1920&auto=format",
+      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1920&auto=format"
+    ],
+    price: 410,
+    rating: 4.93,
+    description: "Live out your fairytale dreams in this meticulously restored gothic castle tower dating back to the 14th century. The multi-level accommodation features a spiral staircase leading to a luxurious bedroom with panoramic views of Edinburgh's historic skyline and the distant highlands. Stone walls, period furnishings, and modern comforts create an atmosphere of timeless romance and adventure.",
+    tags: ["Gothic", "Tower", "Historic", "Romantic"],
+    categories: ["castles", "views"],
+    features: ["1 tower suite", "1.5 bathrooms", "Spiral staircase", "Stone fireplace", "Panoramic views", "Four-poster bed", "Library nook", "Whisky tasting"],
+    host: {
+      name: "Alistair",
+      image: "https://i.pravatar.cc/150?img=33",
+      isSuperHost: true,
+      joinedDate: "2017"
+    },
+    reviews: 89,
+    location_cords: {
+      lat: 55.9533,
+      lng: -3.1883
+    },
+    isPremium: true,
+    isRareFind: true
+  }
 ];
 
 // Function to generate map pins from listings
@@ -341,4 +575,15 @@ export function getMapPins() {
 // Function to get a listing by id
 export function getListingById(id: string) {
   return listings.find(listing => listing.id === id) || null;
+}
+
+// Function to filter listings by category
+export function getListingsByCategory(categoryId: string | null) {
+  if (!categoryId) {
+    return listings;
+  }
+  
+  return listings.filter(listing => 
+    listing.categories && listing.categories.includes(categoryId)
+  );
 }
