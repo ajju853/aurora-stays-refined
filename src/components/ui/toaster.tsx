@@ -1,3 +1,4 @@
+
 import { useToast } from "@/hooks/use-toast"
 import {
   Toast,
@@ -9,7 +10,9 @@ import {
 } from "@/components/ui/toast"
 
 export function Toaster() {
-  const { toasts } = useToast()
+  // Handle the case where useToast might be called outside a React context
+  const toastContext = useToast();
+  const { toasts } = toastContext || { toasts: [] };
 
   return (
     <ToastProvider>
