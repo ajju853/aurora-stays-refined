@@ -1,8 +1,9 @@
 
 import { useState } from "react";
-import { Heart, Star } from "lucide-react";
+import { Heart, Star, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import { Badge } from "@/components/ui/badge";
 
 type ListingCardProps = {
   id: string;
@@ -16,6 +17,8 @@ type ListingCardProps = {
   isFavorite?: boolean;
   className?: string;
   index?: number;
+  featured?: boolean;
+  isRareFind?: boolean;
 };
 
 export function ListingCard({
@@ -30,14 +33,21 @@ export function ListingCard({
   isFavorite = false,
   className,
   index = 0,
+  featured = false,
+  isRareFind = false,
 }: ListingCardProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [favorited, setFavorited] = useState(isFavorite);
   const [isHovered, setIsHovered] = useState(false);
+  const [isHeartAnimating, setIsHeartAnimating] = useState(false);
 
   const handleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
     setFavorited(!favorited);
+    if (!favorited) {
+      setIsHeartAnimating(true);
+      setTimeout(() => setIsHeartAnimating(false), 1000);
+    }
   };
 
   const nextImage = (e: React.MouseEvent) => {
@@ -50,17 +60,22 @@ export function ListingCard({
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  // Randomly make some listings featured or rare finds for demo purposes
+  const showFeatured = featured || (index % 7 === 0);
+  const showRareFind = isRareFind || (index % 5 === 0);
+
   return (
     <Link 
       to={`/listing/${id}`}
       className={cn(
         "block rounded-3xl overflow-hidden transform transition-all duration-300 card-hover-zoom",
-        "animate-fade-in",
+        "animate-fade-in hover:translate-y-[-8px] hover:shadow-xl",
         className
       )}
       style={{ 
         animationDelay: `${index * 100}ms`,
-        opacity: 0 // Start invisible, animation will fade it in
+        opacity: 0, // Start invisible, animation will fade it in
+        perspective: "1000px",
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -69,24 +84,45 @@ export function ListingCard({
         <img
           src={images[currentImageIndex]}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-500"
+          className={cn(
+            "w-full h-full object-cover transition-transform duration-500",
+            isHovered && "scale-110"
+          )}
         />
         
         <button
           onClick={handleFavorite}
           className={cn(
             "absolute top-3 right-3 z-10 p-2 rounded-full transition-all",
-            favorited ? "bg-primary/10" : "bg-black/20 hover:bg-black/30"
+            favorited ? "bg-primary/20 backdrop-blur-sm" : "bg-black/20 backdrop-blur-sm hover:bg-black/30"
           )}
         >
           <Heart
             className={cn(
               "h-5 w-5",
               favorited ? "fill-primary stroke-primary" : "stroke-white", 
-              favorited && "animate-pulse-heart"
+              isHeartAnimating && "animate-pulse-heart"
             )}
           />
         </button>
+
+        {/* Status badges with glassmorphism */}
+        {showFeatured && (
+          <div className="absolute top-3 left-3 z-10">
+            <Badge variant="default" className="bg-primary/70 backdrop-blur-sm flex items-center gap-1">
+              <Award className="h-3 w-3" />
+              <span>Featured</span>
+            </Badge>
+          </div>
+        )}
+        
+        {showRareFind && !showFeatured && (
+          <div className="absolute top-3 left-3 z-10">
+            <Badge variant="default" className="bg-indigo-500/70 backdrop-blur-sm">
+              Rare Find
+            </Badge>
+          </div>
+        )}
 
         {/* Image navigation dots */}
         {images.length > 1 && (
@@ -107,8 +143,9 @@ export function ListingCard({
         {images.length > 1 && isHovered && (
           <>
             <button 
-              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1"
+              className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 transition-all opacity-0 hover:opacity-100"
               onClick={prevImage}
+              style={{ opacity: isHovered ? 0.8 : 0 }}
             >
               <span className="sr-only">Previous image</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,8 +153,9 @@ export function ListingCard({
               </svg>
             </button>
             <button 
-              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1"
+              className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-1 transition-all opacity-0 hover:opacity-100"
               onClick={nextImage}
+              style={{ opacity: isHovered ? 0.8 : 0 }}
             >
               <span className="sr-only">Next image</span>
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,7 +170,7 @@ export function ListingCard({
         <div className="flex justify-between">
           <h3 className="font-medium text-lg truncate">{title}</h3>
           <div className="flex items-center">
-            <Star className="w-4 h-4 fill-foreground stroke-0" />
+            <Star className={cn("w-4 h-4 fill-foreground stroke-0", rating >= 4.8 && "text-primary")} />
             <span className="ml-1 text-sm">{rating.toFixed(1)}</span>
           </div>
         </div>
