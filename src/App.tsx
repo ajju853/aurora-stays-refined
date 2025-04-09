@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ListingDetail from "./pages/ListingDetail";
 import Experiences from "./pages/Experiences";
+import Luxury from "./pages/Luxury";
 import { ThemeProvider } from "next-themes";
 
 // Create the query client outside the component
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/listing/:id" element={<ListingDetail />} />
           <Route path="/experiences" element={<Experiences />} />
+          <Route path="/luxury" element={<Luxury />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

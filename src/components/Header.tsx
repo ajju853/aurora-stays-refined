@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLocation } from "react";
 import { Link } from "react-router-dom";
 import { Heart, Globe, Menu, User, Search, PlusCircle, MessageSquare, Bell } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -15,6 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function Header() {
+  const { pathname } = useLocation();
+  const [showSearch, setShowSearch] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
@@ -39,6 +40,12 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
 
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "Experiences", path: "/experiences" },
+    { name: "Luxury", path: "/luxury" }
+  ];
+
   return (
     <header className={cn(
       "fixed top-0 left-0 right-0 z-40 px-4 py-4 transition-all duration-300",
@@ -56,15 +63,11 @@ export function Header() {
         </Link>
 
         <div className="hidden md:flex items-center space-x-1">
-          <Link to="/">
-            <Button variant="ghost" className="rounded-full hover:bg-secondary">Stays</Button>
-          </Link>
-          <Link to="/experiences">
-            <Button variant="ghost" className="rounded-full hover:bg-secondary">Experiences</Button>
-          </Link>
-          <Link to="/luxury">
-            <Button variant="ghost" className="rounded-full hover:bg-secondary">Luxury</Button>
-          </Link>
+          {menuItems.map(item => (
+            <Link key={item.name} to={item.path}>
+              <Button variant="ghost" className="rounded-full hover:bg-secondary">{item.name}</Button>
+            </Link>
+          ))}
         </div>
 
         <div className="flex items-center space-x-2">
