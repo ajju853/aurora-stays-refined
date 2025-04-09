@@ -1,4 +1,3 @@
-
 // Sample data for listings
 export const listings = [
   {
@@ -482,53 +481,4 @@ export const listings = [
     images: [
       "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=1920&auto=format",
       "https://images.unsplash.com/photo-1514516816566-de580c621376?q=80&w=1920&auto=format",
-      "https://images.unsplash.com/photo-1517449683164-24a635eb4e10?q=80&w=1920&auto=format"
-    ],
-    price: 320,
-    rating: 4.96,
-    description: "Experience luxury and adventure in this beautiful Alpine chalet with panoramic mountain views. After a day on the slopes, relax in your private outdoor hot tub while taking in the magnificent scenery. The interior features traditional wooden architecture with modern amenities, a cozy fireplace, and a fully equipped kitchen. Located just a short distance from some of the best ski runs in Chamonix.",
-    tags: ["Ski-in/Ski-out", "Hot Tub", "Mountain View", "Luxury"],
-    categories: ["skiing", "views"],
-    features: ["3 bedrooms", "2 bathrooms", "Private hot tub", "Fireplace", "Ski storage", "Mountain views", "Full kitchen", "Balcony"],
-    host: {
-      name: "Jean",
-      image: "https://i.pravatar.cc/150?img=33",
-      isSuperHost: true,
-      joinedDate: "2015"
-    },
-    reviews: 122,
-    location_cords: {
-      lat: 45.9237,
-      lng: 6.8694
-    },
-    isPremium: true
-  }
-]
-
-// Function to get all listings
-export const getListings = () => {
-  return listings;
-};
-
-// Function to get a specific listing by ID
-export const getListingById = (id: string) => {
-  return listings.find(listing => listing.id === id);
-};
-
-// Function to get listings filtered by category
-export const getListingsByCategory = (category: string | null) => {
-  if (!category) return listings;
-  return listings.filter(listing => listing.categories.includes(category));
-};
-
-// Function to get coordinates for map pins
-export const getMapPins = () => {
-  return listings.map(listing => ({
-    id: listing.id,
-    listingId: listing.id,
-    lat: listing.location_cords.lat,
-    lng: listing.location_cords.lng,
-    title: listing.title,
-    price: listing.price
-  }));
-};
+      "https://images.unsplash.com/photo-1517449
