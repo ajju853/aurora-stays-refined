@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Heart, Star, Award, Diamond, Crown, Shield } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -45,6 +44,19 @@ export function ListingCard({
   const [favorited, setFavorited] = useState(isFavorite);
   const [isHovered, setIsHovered] = useState(false);
   const [isHeartAnimating, setIsHeartAnimating] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
+  const processImagePath = (imagePath: string) => {
+    if (imagePath.startsWith('http')) {
+      return imagePath;
+    }
+    
+    if (imagePath.startsWith('public/')) {
+      return imagePath.replace('public/', '/');
+    }
+    
+    return imagePath;
+  };
 
   const handleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -58,19 +70,26 @@ export function ListingCard({
   const nextImage = (e: React.MouseEvent) => {
     e.preventDefault();
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
+    setImageError(false);
   };
 
   const prevImage = (e: React.MouseEvent) => {
     e.preventDefault();
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    setImageError(false);
   };
 
-  // Display premium badge if the property is marked as premium
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   const showPremium = isPremium || (index % 4 === 0);
-  // Display featured badge if the property is marked as featured
   const showFeatured = isFeatured || featured || (index % 7 === 0);
-  // Display rare find badge if the property is marked as a rare find
   const showRareFind = isRareFind || (index % 5 === 0);
+
+  const currentImage = images[currentImageIndex];
+  const processedImageUrl = processImagePath(currentImage);
+  const fallbackImage = "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1920&auto=format";
 
   return (
     <motion.div
@@ -93,12 +112,13 @@ export function ListingCard({
       >
         <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl">
           <img
-            src={images[currentImageIndex]}
+            src={imageError ? fallbackImage : processedImageUrl}
             alt={title}
             className={cn(
               "w-full h-full object-cover transition-transform duration-500",
               isHovered && "scale-110"
             )}
+            onError={handleImageError}
           />
           
           <motion.button
@@ -118,7 +138,6 @@ export function ListingCard({
             />
           </motion.button>
 
-          {/* Premium status badge with glassmorphism */}
           {showPremium && (
             <div className="absolute top-3 left-3 z-10">
               <motion.div
@@ -134,7 +153,6 @@ export function ListingCard({
             </div>
           )}
 
-          {/* Featured badge with glassmorphism */}
           {showFeatured && !showPremium && (
             <div className="absolute top-3 left-3 z-10">
               <motion.div
@@ -150,7 +168,6 @@ export function ListingCard({
             </div>
           )}
           
-          {/* Rare find badge with glassmorphism */}
           {showRareFind && !showPremium && !showFeatured && (
             <div className="absolute top-3 left-3 z-10">
               <motion.div
@@ -166,7 +183,6 @@ export function ListingCard({
             </div>
           )}
 
-          {/* Image navigation dots */}
           {images.length > 1 && (
             <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1">
               {images.map((_, i) => (
@@ -181,7 +197,6 @@ export function ListingCard({
             </div>
           )}
 
-          {/* Image navigation arrows - only show on hover */}
           {images.length > 1 && isHovered && (
             <>
               <motion.button 
@@ -213,7 +228,6 @@ export function ListingCard({
             </>
           )}
 
-          {/* Premium glass effect overlay on hover */}
           {isPremium && isHovered && (
             <motion.div
               initial={{ opacity: 0 }}
