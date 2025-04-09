@@ -1,3 +1,4 @@
+
 // Sample data for listings
 export const listings = [
   {
@@ -524,6 +525,7 @@ export const getListingsByCategory = (category: string | null) => {
 export const getMapPins = () => {
   return listings.map(listing => ({
     id: listing.id,
+    listingId: listing.id,
     lat: listing.location_cords.lat,
     lng: listing.location_cords.lng,
     title: listing.title,
