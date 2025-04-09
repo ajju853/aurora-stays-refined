@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from "react";
 import { SearchBar } from "@/components/SearchBar";
 import { CategoryFilter } from "@/components/CategoryFilter";
@@ -11,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { listings, getMapPins, getListingsByCategory } from "@/data/mockListings";
 import { MapPin, Globe, Sparkles, Diamond, Award } from "lucide-react";
 import { motion } from "framer-motion";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const Index = () => {
   const [showMap, setShowMap] = useState(false);
@@ -22,12 +22,10 @@ const Index = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   
-  // Apply category filtering
   useEffect(() => {
     setFilteredListings(getListingsByCategory(activeCategory));
   }, [activeCategory]);
   
-  // Parallax effect for hero section
   useEffect(() => {
     const handleScroll = () => {
       if (!heroRef.current) return;
@@ -41,7 +39,6 @@ const Index = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Handle video loading
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.addEventListener('loadeddata', () => {
@@ -50,22 +47,34 @@ const Index = () => {
     }
   }, []);
 
-  // Separate premium and featured listings for special showcase
   const premiumListings = filteredListings.filter(listing => listing.isPremium);
   const featuredListings = filteredListings.filter(listing => listing.isFeatured && !listing.isPremium);
   const regularListings = filteredListings.filter(listing => !listing.isPremium && !listing.isFeatured);
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50 } }
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       
-      {/* Hero Section with Video Background */}
       <section className="relative h-[85vh] w-full overflow-hidden">
         <div 
           ref={heroRef} 
           className="absolute inset-0 w-full h-full z-0"
         >
-          {/* Video Background with Fallback Image */}
           <div className={`absolute inset-0 transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-100' : 'opacity-0'}`}>
             <video
               ref={videoRef}
@@ -79,7 +88,6 @@ const Index = () => {
             </video>
           </div>
           
-          {/* Fallback image while video loads */}
           <div className={`absolute inset-0 transition-opacity duration-1000 ${isVideoLoaded ? 'opacity-0' : 'opacity-100'}`}>
             <img
               src="https://images.unsplash.com/photo-1501876725168-00c445821c9e?q=80&w=2070&auto=format"
@@ -134,22 +142,44 @@ const Index = () => {
       </section>
       
       <div className="max-w-7xl mx-auto w-full px-4 py-8 md:py-16">
-        {/* Category Filtering */}
-        <div className="mb-12">
-          <div className="flex justify-between items-center mb-6">
+        <motion.div 
+          className="mb-12"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <motion.div 
+            className="flex justify-between items-center mb-6"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
+          >
             <h2 className="text-3xl font-display font-semibold">Explore top destinations</h2>
             <Button variant="ghost" className="flex items-center gap-2 rounded-full">
               <Sparkles className="h-4 w-4 text-primary" />
               Inspire Me
             </Button>
-          </div>
+          </motion.div>
           <CategoryFilter onCategoryChange={setActiveCategory} />
-        </div>
+        </motion.div>
       
-        {/* Premium Collection */}
         {premiumListings.length > 0 && (
-          <div className="mb-16">
-            <div className="flex justify-between items-center mb-6">
+          <motion.div 
+            className="mb-16"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <motion.div 
+              className="flex justify-between items-center mb-6"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5 }}
+            >
               <h2 className="text-3xl font-display font-semibold flex items-center gap-2">
                 <Diamond className="h-6 w-6 text-amber-500" />
                 Premium Collection
@@ -158,32 +188,50 @@ const Index = () => {
                 <Sparkles className="h-4 w-4 text-amber-500" />
                 View All Premium
               </Button>
-            </div>
+            </motion.div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-50px" }}
+            >
               {premiumListings.slice(0, 3).map((listing, index) => (
-                <ListingCard
-                  key={listing.id}
-                  id={listing.id}
-                  title={listing.title}
-                  location={listing.location}
-                  images={listing.images}
-                  price={listing.price}
-                  rating={listing.rating}
-                  tags={listing.tags}
-                  index={index}
-                  isPremium={true}
-                  className={focusedListing === listing.id ? "ring-2 ring-amber-500 ring-offset-2" : ""}
-                />
+                <motion.div key={listing.id} variants={itemVariants}>
+                  <ListingCard
+                    id={listing.id}
+                    title={listing.title}
+                    location={listing.location}
+                    images={listing.images}
+                    price={listing.price}
+                    rating={listing.rating}
+                    tags={listing.tags}
+                    index={index}
+                    isPremium={true}
+                    className={focusedListing === listing.id ? "ring-2 ring-amber-500 ring-offset-2" : ""}
+                  />
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
 
-        {/* Featured Properties */}
         {featuredListings.length > 0 && (
-          <div className="mb-16">
-            <div className="flex justify-between items-center mb-6">
+          <motion.div 
+            className="mb-16"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <motion.div 
+              className="flex justify-between items-center mb-6"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5 }}
+            >
               <h2 className="text-3xl font-display font-semibold flex items-center gap-2">
                 <Award className="h-6 w-6 text-primary" />
                 Featured Properties
@@ -192,72 +240,91 @@ const Index = () => {
                 <Sparkles className="h-4 w-4 text-primary" />
                 View All Featured
               </Button>
-            </div>
+            </motion.div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-50px" }}
+            >
               {featuredListings.slice(0, 3).map((listing, index) => (
-                <ListingCard
-                  key={listing.id}
-                  id={listing.id}
-                  title={listing.title}
-                  location={listing.location}
-                  images={listing.images}
-                  price={listing.price}
-                  rating={listing.rating}
-                  tags={listing.tags}
-                  index={index}
-                  isFeatured={true}
-                  className={focusedListing === listing.id ? "ring-2 ring-primary ring-offset-2" : ""}
-                />
+                <motion.div key={listing.id} variants={itemVariants}>
+                  <ListingCard
+                    id={listing.id}
+                    title={listing.title}
+                    location={listing.location}
+                    images={listing.images}
+                    price={listing.price}
+                    rating={listing.rating}
+                    tags={listing.tags}
+                    index={index}
+                    isFeatured={true}
+                    className={focusedListing === listing.id ? "ring-2 ring-primary ring-offset-2" : ""}
+                  />
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
         
-        {/* Main Explore Section */}
         <div className="flex mt-4 mb-8">
           <div className={`transition-all duration-500 ${
             showMap ? "w-1/2 pr-4" : "w-full"
           }`}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <motion.div 
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-50px" }}
+            >
               {regularListings.map((listing, index) => (
-                <ListingCard
-                  key={listing.id}
-                  id={listing.id}
-                  title={listing.title}
-                  location={listing.location}
-                  images={listing.images}
-                  price={listing.price}
-                  rating={listing.rating}
-                  tags={listing.tags}
-                  index={index}
-                  isRareFind={listing.isRareFind}
-                  className={focusedListing === listing.id ? "ring-2 ring-primary ring-offset-2" : ""}
-                />
+                <motion.div key={listing.id} variants={itemVariants}>
+                  <ListingCard
+                    id={listing.id}
+                    title={listing.title}
+                    location={listing.location}
+                    images={listing.images}
+                    price={listing.price}
+                    rating={listing.rating}
+                    tags={listing.tags}
+                    index={index}
+                    isRareFind={listing.isRareFind}
+                    className={focusedListing === listing.id ? "ring-2 ring-primary ring-offset-2" : ""}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
           
           {showMap && (
-            <div className="w-1/2 sticky top-24 h-[calc(100vh-140px)]">
+            <motion.div 
+              className="w-1/2 sticky top-24 h-[calc(100vh-140px)]"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <Map 
                 pins={getMapPins()}
                 className="w-full h-full rounded-3xl shadow-lg"
                 onPinClick={(id) => setFocusedListing(id)}
               />
-            </div>
+            </motion.div>
           )}
         </div>
         
-        {/* Map toggle button - Only visible on desktop */}
         <div className="hidden md:block fixed bottom-8 left-1/2 transform -translate-x-1/2 z-30">
-          <Button 
-            onClick={() => setShowMap(!showMap)} 
-            className="rounded-full shadow-lg px-6 py-6 flex items-center gap-2 glass"
-          >
-            {showMap ? 'Hide map' : 'Show map'}
-            <MapPin className="h-5 w-5" />
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button 
+              onClick={() => setShowMap(!showMap)} 
+              className="rounded-full shadow-lg px-6 py-6 flex items-center gap-2 glass"
+            >
+              {showMap ? 'Hide map' : 'Show map'}
+              <MapPin className="h-5 w-5" />
+            </Button>
+          </motion.div>
         </div>
       </div>
       
@@ -266,6 +333,7 @@ const Index = () => {
       </div>
       
       <MobileNav />
+      <ScrollToTop />
     </div>
   );
 };

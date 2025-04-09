@@ -9,6 +9,7 @@ import ListingDetail from "./pages/ListingDetail";
 import Experiences from "./pages/Experiences";
 import Luxury from "./pages/Luxury";
 import { ThemeProvider } from "next-themes";
+import { PageTransition } from "./components/PageTransition";
 
 // Create the query client outside the component
 const queryClient = new QueryClient();
@@ -19,13 +20,15 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/listing/:id" element={<ListingDetail />} />
-          <Route path="/experiences" element={<Experiences />} />
-          <Route path="/luxury" element={<Luxury />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/listing/:id" element={<ListingDetail />} />
+            <Route path="/experiences" element={<Experiences />} />
+            <Route path="/luxury" element={<Luxury />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </PageTransition>
       </BrowserRouter>
     </QueryClientProvider>
   </ThemeProvider>
