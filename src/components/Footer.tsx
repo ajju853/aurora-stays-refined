@@ -7,9 +7,44 @@ import { toast } from "sonner";
 export function Footer() {
   const handleLinkClick = (section: string, item: string) => {
     // Prevent default navigation since these are placeholder links
-    toast.info(`Navigating to ${section}: ${item}`, {
-      description: "This would navigate to the actual page in a production app."
-    });
+    
+    // Enhanced toast messages for Aurora Stays section
+    if (section === "Aurora Stays") {
+      switch (item) {
+        case "About":
+          toast.info("About Aurora Stays", {
+            description: "Founded in 2020, Aurora Stays revolutionized the way people travel by connecting guests with unique accommodations around the world.",
+            duration: 5000
+          });
+          break;
+        case "Careers":
+          toast.info("Join Our Team", {
+            description: "We're always looking for talented individuals. Discover exciting opportunities across technology, design, customer service, and more.",
+            duration: 5000
+          });
+          break;
+        case "Press":
+          toast.info("Aurora Stays Press Room", {
+            description: "Get the latest news, updates, and media resources from the Aurora Stays press team. Contact press@aurorastays.com for inquiries.",
+            duration: 5000
+          });
+          break;
+        case "Investors":
+          toast.info("Investor Relations", {
+            description: "Aurora Stays is committed to creating long-term value for our shareholders. Access financial reports, presentations, and governance information.",
+            duration: 5000
+          });
+          break;
+        default:
+          toast.info(`Navigating to ${section}: ${item}`, {
+            description: "This would navigate to the actual page in a production app."
+          });
+      }
+    } else {
+      toast.info(`Navigating to ${section}: ${item}`, {
+        description: "This would navigate to the actual page in a production app."
+      });
+    }
   };
 
   return (
